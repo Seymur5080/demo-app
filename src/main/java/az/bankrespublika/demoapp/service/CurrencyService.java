@@ -45,7 +45,7 @@ public class CurrencyService {
             });
 
             // Step 3: Replace existing data (удаляем старые данные за эту дату и сохраняем новые)
-            replaceExistingData(date, currencyReport);
+//            replaceExistingData(date, currencyReport);
 
             // Step 4: Return success message (возвращаем успешное сообщение)
             return BaseResponse.ok("Currencies for " + date + " successfully saved to the database with " +
@@ -56,10 +56,10 @@ public class CurrencyService {
     }
 
 
-    private void replaceExistingData(String date, CurrencyReport currencyReport) {
-        currencyReportRepository.findByDate(date).ifPresent(currencyReportRepository::delete);
-        currencyReportRepository.save(currencyReport);
-    }
+//    private void replaceExistingData(String date, CurrencyReport currencyReport) {
+//        currencyReportRepository.findByDate(date).ifPresent(currencyReportRepository::delete);
+//        currencyReportRepository.save(currencyReport);
+//    }
 
     public ResponseEntity<BaseResponse<Map<String, BigDecimal>>> convertCurrency(String token, String fromCode, String toCode, Double amount) {
         // check login user token
