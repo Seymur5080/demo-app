@@ -78,7 +78,9 @@ public class AccountService {
 
     public ResponseEntity<BaseResponse<Void>> closeAccount(String token, String accountNo) {
         // check login user token (проверяем токен пользователя в БД)
-        authenticationService.validateToken(token);
+//        authenticationService.validateToken(token);
+
+        validateAccountOwnership(token, accountNo);
 
         // check active account in DB
         Account account = getAccountByAccountNo(accountNo, "Account not found!");
@@ -91,7 +93,9 @@ public class AccountService {
 
     public ResponseEntity<BaseResponse<Void>> addAmount(String token, AmountRequestDto request) {
         // check login user token (проверяем токен пользователя)
-        authenticationService.validateToken(token);
+//        authenticationService.validateToken(token);
+
+        validateAccountOwnership(token, request.getAccountNo());
 
         // check account in DB (ищем счет в БД по номеру)
         Account account = getAccountByAccountNo(request.getAccountNo(), "Account not found!");
@@ -104,6 +108,7 @@ public class AccountService {
     public ResponseEntity<BaseResponse<String>> transferMoney(String token, TransferRequestDto request) {
         // check login user token (проверяем токен пользователя)
         User user = authenticationService.validateToken(token);
+//        validateAccountOwnership(token, request.getFromAccountNo());
 
         // check from account in database (проверка счета отправителя)
         Account fromAccount = getAccountByAccountNo(request.getFromAccountNo(), "From account not found!");
@@ -149,5 +154,15 @@ public class AccountService {
     private Account getAccountByAccountNo(String accountNo, String message) {
         return accountRepository.findByAccountNoAndActiveTrue(accountNo)
                 .orElseThrow(() -> new NotFoundException(message));
+    }
+
+    // Checking the account ownership of a user (проверка принадлежности счёта пользователю)
+    private void validateAccountOwnership(String token, String accountNo) {
+        User user = authenticationService.validateToken(token);
+        Account account = getAccountByAccountNo(accountNo, "Account not found!");
+
+        if (!account.getUser().equals(user)) {
+            throw new IllegalArgumentException("Unauthorized: This account does not belong to you!");
+        }
     }
 }
