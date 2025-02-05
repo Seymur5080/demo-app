@@ -34,8 +34,10 @@ public class CurrencyType {
     @OneToMany(mappedBy = "currencyType", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Currency> currencies = new ArrayList<>();
 
+    /*
     public void addCurrency(Currency currency) {
         currencies.add(currency);
         currency.setCurrencyType(this);
     }
+     */
 }

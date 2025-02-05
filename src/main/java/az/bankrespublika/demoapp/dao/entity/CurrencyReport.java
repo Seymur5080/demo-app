@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -39,8 +38,10 @@ public class CurrencyReport {
     @OneToMany(mappedBy = "currencyReport", cascade = CascadeType.ALL, orphanRemoval = true)
     List<CurrencyType> currencyTypes = new ArrayList<>();
 
+    /*
     public void addCurrencyType(CurrencyType currencyType) {
         currencyTypes.add(currencyType);
         currencyType.setCurrencyReport(this);
     }
+     */
 }
