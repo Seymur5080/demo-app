@@ -30,7 +30,6 @@ public class CurrencyService {
     CurrencyReportRepository currencyReportRepository;
     CurrencyRepository currencyRepository;
 
-
     @Transactional
     public ResponseEntity<BaseResponse<String>> fetchAndSaveCurrencies(String date) {
         try {
@@ -55,7 +54,6 @@ public class CurrencyService {
             throw new RuntimeException("Failed to fetch and save currencies for " + date, e);
         }
     }
-
 
     private void replaceExistingData(String date, CurrencyReport currencyReport) {
         currencyReportRepository.findByDate(date).ifPresent(currencyReportRepository::delete);
