@@ -1,6 +1,5 @@
 package az.bankrespublika.demoapp.dao.repository;
 
-
 import az.bankrespublika.demoapp.dao.entity.CurrencyReport;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
