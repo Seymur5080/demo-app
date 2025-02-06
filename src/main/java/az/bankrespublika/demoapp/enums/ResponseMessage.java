@@ -1,5 +1,14 @@
 package az.bankrespublika.demoapp.enums;
 
-public class ResponseMessage {
-    public static final String SUCCESS = "success";
+import lombok.Getter;
+
+@Getter
+public enum ResponseMessage {
+    SUCCESS("success");
+
+    private final String message;
+
+    ResponseMessage(String message) {
+        this.message = message;
+    }
 }
