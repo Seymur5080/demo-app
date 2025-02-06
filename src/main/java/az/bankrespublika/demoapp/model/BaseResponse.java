@@ -1,5 +1,6 @@
 package az.bankrespublika.demoapp.model;
 
+import az.bankrespublika.demoapp.enums.ResponseMessage;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
@@ -48,18 +49,18 @@ public class BaseResponse<T> {
     }
 
     public static ResponseEntity<BaseResponse<Void>> ok() {
-        return BaseResponse.<Void>buildResponse(HttpStatus.OK, SUCCESS, null).toResponseEntity();
+        return BaseResponse.<Void>buildResponse(HttpStatus.OK, SUCCESS.getMessage(), null).toResponseEntity();
     }
 
     public static <T> ResponseEntity<BaseResponse<T>> ok(T data) {
-        return BaseResponse.buildResponse(HttpStatus.OK, SUCCESS, data).toResponseEntity();
+        return BaseResponse.buildResponse(HttpStatus.OK, SUCCESS.getMessage(), data).toResponseEntity();
     }
 
     public static ResponseEntity<BaseResponse<Void>> success(HttpStatus status) {
-        return BaseResponse.<Void>buildResponse(status, SUCCESS, null).toResponseEntity();
+        return BaseResponse.<Void>buildResponse(status, SUCCESS.getMessage(), null).toResponseEntity();
     }
 
     public static <T> ResponseEntity<BaseResponse<T>> success(HttpStatus status, T data) {
-        return BaseResponse.buildResponse(status, SUCCESS, data).toResponseEntity();
+        return BaseResponse.buildResponse(status, SUCCESS.getMessage(), data).toResponseEntity();
     }
 }
